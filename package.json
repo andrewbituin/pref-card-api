@@ -10,8 +10,9 @@
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "debug": "ndb node app",
-    "predeploy": "npm audit",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku master",
+    "migrate-production": "postgrator --config postgrator-production-config.js",
+    "predeploy": "npm audit && npm run migrate-production"
   },
   "keywords": [],
   "author": "",
