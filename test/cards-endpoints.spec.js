@@ -6,6 +6,7 @@ describe("Cards Endpoints", () => {
   let db;
 
   const { testUsers, testCards } = helpers.makeCardsFixtures();
+  
   const token =
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE1NTM3OTQ4MjIsInN1YiI6InNhbnNhIn0.PVaZrgRZ945dBCp2VzeTjhgqG36nKymuw6kBvuQ9hwA";
   before("Make knex instance", () => {
@@ -31,6 +32,7 @@ describe("Cards Endpoints", () => {
           .expect(200, []);
       });
     });
+
     context("Given there are cards and users in the db", () => {
       beforeEach("insert cards and users", () => {
         helpers.seedTables(db, testUsers, testCards);
@@ -38,7 +40,7 @@ describe("Cards Endpoints", () => {
       it("responds with 200 and all cards", () => {
         const expectedCards = [
           {
-            "date_created": "2019-03-24T20:06:15.797Z",
+            date_created: "2019-03-24T20:06:15.797Z",
             dominant_hand: "right",
             dressings: "Triple antibiotic ointment",
             equipment: "Electrosurgical unit with dispersive electrode",

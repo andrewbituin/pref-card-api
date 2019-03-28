@@ -19,7 +19,6 @@ cardsRouter
   .route("/:id")
   .all(requireAuth)
   .get((req, res, next) => {
-    console.log(req.params.id);
     CardsService.getCardById(req.app.get("db"), req.params.id).then(data =>
       res.json(data)
     );

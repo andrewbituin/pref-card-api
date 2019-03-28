@@ -21,14 +21,19 @@ const AuthService = {
       .where({ id })
       .first();
   },
-  hasUserWithUserName(db, user_name){
-    return db('prefcard_users')
+  hasUserWithUserName(db, user_name) {
+    return db("prefcard_users")
       .where({ user_name })
       .first()
-      .then(user => !!user)
+      .then(user => !!user);
   },
   getAllUsers(db) {
-    return db("prefcard_users").select("id", 'user_name', 'full_name', 'position');
+    return db("prefcard_users").select(
+      "id",
+      "user_name",
+      "full_name",
+      "position"
+    );
   },
   comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);
@@ -67,7 +72,7 @@ const AuthService = {
     return null;
   },
   hashPassword(password) {
-    return bcrypt.hash(password, 12)
+    return bcrypt.hash(password, 12);
   },
   serializeUser(user) {
     return {
@@ -75,6 +80,39 @@ const AuthService = {
       full_name: xss(user.full_name),
       user_name: xss(user.user_name),
       date_create: new Date(user.date_created)
+    };
+  },
+  serializeCard(card) {
+    const {
+      surgeon,
+      procedure,
+      position,
+      glove_type,
+      dominant_hand,
+      equipment,
+      supplies,
+      instrumentation,
+      suture_and_usage,
+      dressings,
+      skin_prep,
+      medications,
+      user_id
+    } = card;
+    return {
+      surgeon,
+      procedure,
+      position,
+      glove_size: parseInt(glove_size),
+      glove_type,
+      dominant_hand,
+      equipment,
+      supplies,
+      instrumentation,
+      suture_and_usage,
+      dressings,
+      skin_prep,
+      medications,
+      user_id
     };
   }
 };

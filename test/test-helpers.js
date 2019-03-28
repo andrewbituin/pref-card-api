@@ -101,10 +101,9 @@ function makeExpectedCard(users, card) {
     skin_prep: card.skin_prep,
     supplies: card.supplies,
     surgeon: card.surgeon,
-    suture_and_usage: card.suture_and_usage,
+    suture_and_usage: card.suture_and_usage
   };
 }
-
 function cleanTables(db) {
   return db.raw(
     `TRUNCATE
@@ -124,12 +123,63 @@ function seedTables(db, users, cards) {
     db.into("prefcard_cards").insert(cards)
   );
 }
-
+function makeMaliciousCard(user) {
+  const maliciousCard = {
+    date_created: "2019-03-24T20:06:15.797Z",
+    dominant_hand: "right",
+    dressings: "Triple antibiotic ointment",
+    equipment: "Electrosurgical unit with dispersive electrode",
+    glove_size: 7,
+    glove_type: "small",
+    id: 2,
+    instrumentation: "Minor instrumentation set",
+    medications: "Bupivacaine",
+    position: "Supine",
+    procedure: "Spinal Fusion",
+    skin_prep: "Shave if necessary",
+    supplies: "Laparotomy pack",
+    surgeon: "Sansa Stark",
+    suture_and_usage: "Ties: 2-0 Vicryl Reel",
+    user_id: 2
+  };
+}
+function makeMaliciousUser(user) {
+  const maliciousUser = {
+    id: 1,
+    user_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
+    full_name: "Jon Snow",
+    position: "doctor",
+    password: "Password1234!"
+  };
+  const expectedUser = {
+    id: 5,
+    user_name: '&lt;script&gt;alert("xss");&lt;/script&gt;',
+    full_name: "Jon Snow",
+    position: "doctor",
+    password: "Password1234!"
+  };
+  return {
+    maliciousUser,
+    expectedUser
+  };
+}
+function seedMaliciousUser(db, maliciousUser) {
+  return seedUsers(db, [maliciousUser]).then(() =>
+    db.into("prefcard_users").insert([maliciousUser])
+  );
+}
+function seedMaliciousCard(db, user, card) {
+  return seedUsers(db, [user]).then(() => {
+    db.into("prefcard_cards").insert([card]);
+  });
+}
 module.exports = {
   makeUsersArray,
   makeCardsArray,
   makeCardsFixtures,
   cleanTables,
   seedTables,
-  makeExpectedCard
+  makeExpectedCard,
+  makeMaliciousUser,
+  seedMaliciousUser
 };
