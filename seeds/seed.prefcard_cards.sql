@@ -26,7 +26,8 @@ INSERT INTO prefcard_cards
     suture_and_usage ,
     dressings ,
     skin_prep ,
-    medications
+    medications,
+    access
     )
 VALUES
     (
@@ -43,7 +44,8 @@ VALUES
         'Ties: 2-0 Vicryl Reel',
         'Triple antibiotic ointment',
         'Shave if necessary',
-        'Bupivacaine'
+        'Bupivacaine',
+        'Kate Nurr'
     ),
         (
         2,
@@ -59,6 +61,7 @@ VALUES
         'Ties: 2-0 Vicryl Reel',
         'Triple antibiotic ointment',
         'Betadine - 5 min',
-        'Control syringe'
+        'Control syringe',
+        'Kate Nurr'
     );
 COMMIT;

@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS prefcard_cards(
     dressings TEXT NOT NULL,
     skin_prep TEXT NOT NULL,
     medications TEXT NOT NULL,
+    access TEXT NOT NULL,
     date_created TIMESTAMP DEFAULT now() NOT NULL
 )
