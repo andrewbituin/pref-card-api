@@ -15,7 +15,6 @@ const AuthService = {
       .where({ user_name })
       .first();
   },
-  // Need a getUserIdWithUserName
   getUserById(db, id) {
     return db("prefcard_users")
       .where({ id })
@@ -76,43 +75,28 @@ const AuthService = {
   },
   serializeUser(user) {
     return {
-      id: user.id,
+      id: xss(user.id),
       full_name: xss(user.full_name),
       user_name: xss(user.user_name),
       date_create: new Date(user.date_created)
     };
   },
   serializeCard(card) {
-    const {
-      surgeon,
-      procedure,
-      position,
-      glove_type,
-      dominant_hand,
-      equipment,
-      supplies,
-      instrumentation,
-      suture_and_usage,
-      dressings,
-      skin_prep,
-      medications,
-      user_id
-    } = card;
     return {
-      surgeon,
-      procedure,
-      position,
-      glove_size: parseInt(glove_size),
-      glove_type,
-      dominant_hand,
-      equipment,
-      supplies,
-      instrumentation,
-      suture_and_usage,
-      dressings,
-      skin_prep,
-      medications,
-      user_id
+      surgeon: xss(card.surgeon),
+      procedure: xss(card.procedure),
+      position: xss(card.position),
+      glove_size: parseInt(card.glove_size),
+      glove_type: xss(card.glove_type),
+      dominant_hand: xss(card.dominant_hand),
+      equipment: xss(card.equipment),
+      supplies: xss(card.supplies),
+      instrumentation: xss(card.instrumentation),
+      suture_and_usage: xss(card.suture_and_usage),
+      dressings: xss(card.dressings),
+      skin_prep: xss(card.skin_prep),
+      medications: xss(card.medications),
+      user_id: xss(card.user_id)
     };
   }
 };

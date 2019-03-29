@@ -2,6 +2,7 @@ const express = require("express");
 const CardsService = require("./cards-service");
 const { requireAuth } = require("../middleware/jwt-auth");
 const jsonBodyParser = express.json()
+const AuthService = require('../auth/auth-service')
 
 const cardsRouter = express.Router();
 
@@ -71,7 +72,7 @@ cardsRouter
         .then(card => {
             res
                 .status(201)
-                .json(card)
+                .json(AuthService.serializeCard(card))
         })
 
 });
