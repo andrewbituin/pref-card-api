@@ -146,7 +146,7 @@ function makeMaliciousCard(user) {
 function makeMaliciousUser(user) {
   const maliciousUser = {
     id: 1,
-    user_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
+    user_name: '<script>alert("xss");</script>',
     full_name: "Jon Snow",
     position: "doctor",
     password: "Password1234!"

@@ -25,7 +25,7 @@ describe('Users endpoints', () => {
             const newTestUsers = [...testUsers]
             const newUser = {
                 id: 5,
-                user_name: '&lt;script&gt;alert("xss");&lt;/script&gt;',
+                user_name: '<script>alert("xss");</script>',
                 full_name: "Jon Snow",
                 position: "doctor",
                 password: "Password1234!"
@@ -36,6 +36,7 @@ describe('Users endpoints', () => {
         })
         it('responds with a sanitized user', () => {
             const { expectedUser } = helpers.makeMaliciousUser()
+            console.log(expectedUser)
             return supertest(app)
                 .get('/api/auth/users')
                 .set('Authorization', token)
@@ -48,7 +49,7 @@ describe('Users endpoints', () => {
     })
     context('Given there are users in the database', () =>{
         it('responds with a users list', () => {
-            
+
         })
     })
   })

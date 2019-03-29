@@ -48,6 +48,11 @@ const AuthService = {
       algorithms: ["HS256"]
     });
   },
+  decodeJwt(token){
+    const decoded = jwt.verify(token, config.JWT_SECRET, {
+      algorithms: ["HS256"]
+    });
+  },
   insertUser(db, newUser) {
     return db
       .insert(newUser)
